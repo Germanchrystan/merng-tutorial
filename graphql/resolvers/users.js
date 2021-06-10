@@ -14,7 +14,7 @@ function generateToken(user){
         },
         SECRET_KEY,
         {expiresIn: '1h'}
-        );
+    );
 }
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
             const { errors, valid } = validateLoginInput(username, password);
             
             if(!valid){
-                throw new UserInputError('Error', {errors})
+                throw new UserInputError('Errors', {errors})
             }
             
             const user = await User.findOne({username})
@@ -61,9 +61,7 @@ module.exports = {
                         username: 'this username is taken'
                     }
                 })
-                
             }
-
             // const emailFound = await User.findOne({email})
             // if(email){ 
             //     throw new UserInputError('E-mail is taken', {
@@ -90,8 +88,8 @@ module.exports = {
             const token = generateToken(res)
 
             return {
-                ...user._doc,
-                id: user._id,
+                ...res._doc,
+                id: res._id,
                 token
             }
         }
